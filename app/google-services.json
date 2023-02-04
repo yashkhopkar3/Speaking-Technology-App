@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "314337457836",
+    "project_id": "speaking-technology",
+    "storage_bucket": "speaking-technology.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314337457836:android:8d769b200aa84ff61f9109",
+        "android_client_info": {
+          "package_name": "com.example.speakingtechnology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314337457836-fg4hf012ugkopfrlh0f0vibrt3805uu5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBJRRvIfVOmRGDDZp_d_MPB7LT2wn7eTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314337457836-fg4hf012ugkopfrlh0f0vibrt3805uu5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
