@@ -164,6 +164,13 @@ public class MainPage extends AppCompatActivity {
                         Intent i = new Intent(MainPage.this, Call.class);
                         startActivity(i);
                     }
+                    else if (ans.contains("object")||ans.contains("detection"))
+                    {
+                        textToSpeech.stop();
+                        textToSpeech.shutdown();
+                        Intent i = new Intent(MainPage.this, Object_Detection.class);
+                        startActivity(i);
+                    }
                     else
                     {
                         textToSpeech.speak("Sorry ! this feature is not available ",TextToSpeech.QUEUE_FLUSH,null,null);
