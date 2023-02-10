@@ -8,6 +8,7 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import java.util.Locale;
 public class battery extends AppCompatActivity {
     private TextToSpeech textToSpeech;
     private TextView txtScreen;
+    ImageView imageView;
     float x1,x2,y1,y2;
     String call;
 
@@ -26,6 +28,16 @@ public class battery extends AppCompatActivity {
             int percentage = intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0);
             txtScreen.setText("Phone Battery percentage is "+ String.valueOf(percentage)+" %");
             call=String.valueOf(percentage);
+            if(percentage<=40){
+                imageView.setImageResource(R.drawable.low);
+            }
+           if(percentage<=80 && percentage>40){
+                imageView.setImageResource(R.drawable.av1);
+            }
+           if(percentage<=100 && percentage>80){
+                imageView.setImageResource(R.drawable.full);
+            }
+
         }
     };
 
@@ -34,6 +46,7 @@ public class battery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battery);
         txtScreen=findViewById(R.id.txtScreen3);
+        imageView=findViewById(R.id.img1);
         this.registerReceiver(this.batterylevelReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         textToSpeech= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {

@@ -4,21 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7ADDCE"
+    android:background="@color/black"
     tools:context=".datetime">
 
     <TextView
         android:id="@+id/txtScreen"
-        android:layout_width="341dp"
-        android:layout_height="246dp"
-        android:background="#832196F3"
+        android:layout_width="329dp"
+        android:layout_height="233dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/black"
         android:gravity="center"
+        android:textColor="#ED05DEFA"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/img863"
+        android:layout_width="517dp"
+        android:layout_height="378dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtScreen"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
+        app:srcCompat="@drawable/time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

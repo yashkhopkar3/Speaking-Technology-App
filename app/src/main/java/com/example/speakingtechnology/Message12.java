@@ -94,12 +94,13 @@ public class Message12 extends AppCompatActivity {
                 if (resultCode == RESULT_OK && null != data) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     phoneno = result.get(0).toLowerCase(Locale.ROOT);
+                    txtScreen2.setText(phoneno);
                     textToSpeech.speak("Please Speak the Message  ", TextToSpeech.QUEUE_FLUSH, null, null);
                     Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                     intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                     intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(4000);
                         startActivityForResult(intent, 100);
 
                     } catch (ActivityNotFoundException a) {

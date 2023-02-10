@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ public class datetime extends AppCompatActivity {
     private TextToSpeech textToSpeech;
     private TextView txtScreen;
     float x1,x2,y1,y2;
+    ImageView imageView;
     String call;
 
     @Override
@@ -23,6 +25,7 @@ public class datetime extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datetime);
         txtScreen=findViewById(R.id.txtScreen);
+        imageView=findViewById(R.id.img863);
         calender();
         textToSpeech= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
