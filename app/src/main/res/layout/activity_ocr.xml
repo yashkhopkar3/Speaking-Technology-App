@@ -3,30 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     tools:context=".OCR"
+    android:background="@color/white"
     android:layout_height="match_parent">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="451dp"
+        android:background="@drawable/ocr" />
 
     <ScrollView
         android:id="@+id/a"
-        android:layout_width="280dp"
-        android:layout_height="621dp"
+        android:layout_width="match_parent"
+        android:layout_height="399dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="36dp">
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_marginStart="-4dp"
             android:layout_marginTop="-2dp"
+            android:layout_marginBottom="14dp"
             android:gravity="center"
             android:text="OCR READER FOR VISUALLY IMPARED PEOPLES"
             android:textColor="@color/black"
             android:textIsSelectable="true"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp" />
     </ScrollView>
