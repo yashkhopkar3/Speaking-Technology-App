@@ -70,7 +70,7 @@ public class Object_Detection extends AppCompatActivity {
         check_permissions();
 
         try {
-            model = SsdMobilenetV11Metadata1.newInstance(this);
+            model= SsdMobilenetV11Metadata1.newInstance(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,7 +101,7 @@ public class Object_Detection extends AppCompatActivity {
             }
             @Override
             public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surfaceTexture) {
-                bitmap = textureView.getBitmap();
+                Bitmap bitmap = textureView.getBitmap();
                 TensorImage image = TensorImage.fromBitmap(bitmap);
 
                 image = imageProcessor.process(image);
@@ -114,37 +114,33 @@ public class Object_Detection extends AppCompatActivity {
                 float[] numberOfDetections = outputs.getNumberOfDetectionsAsTensorBuffer().getFloatArray();
 
                 Bitmap mutable = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-                Canvas c = new Canvas(mutable);
+                Canvas canvas = new Canvas(mutable);
 
-                int h=bitmap.getHeight(), w=bitmap.getWidth();
+                int height = bitmap.getHeight();
+                int width = bitmap.getWidth();
 
-                Paint p = new Paint();
-                p.setAntiAlias(true);
-                p.setStyle(Paint.Style.STROKE);
-                p.setStrokeWidth(10.0f);
-                p.setColor(Color.RED);
-
-                for(int x=0; x<numberOfDetections[0]; x++){
-                    if(scores[x] > 0.6){
-                        Log.d("mssgs", classes[x]+"");
-                        try{
-                            p.setTextSize(150.0f);
-                            p.setColor(Color.WHITE);
-                            c.drawText(labels.get(x), locations[x+1]*w, (locations[x]+0.1f)*h, p);
+                for (int i = 0; i < numberOfDetections[0]; i++) {
+                    if (scores[i] > 0.55) {
+                        Log.d("mssgs", classes[i] + "");
+                        try {
+                            Paint paint = new Paint();
+                            paint.setAntiAlias(true);
+                            paint.setTextSize(150.0f);
+                            paint.setColor(Color.WHITE);
+                            canvas.drawText(labels.get((int)classes[i]), locations[i * 4 + 1] * width, (locations[i * 4] + 0.1f) * height, paint);
                             Thread.sleep(1000);
-                            textToSpeech.speak(labels.get(x),TextToSpeech.QUEUE_FLUSH,null,null);
+                            textToSpeech.speak(labels.get((int)classes[i]),TextToSpeech.QUEUE_FLUSH,null,null);
+                        } catch (NullPointerException | InterruptedException e) {
                         }
-                        catch (NullPointerException | InterruptedException e){
-
-                        }
-                        p.setStyle(Paint.Style.STROKE);
-                        p.setStrokeWidth(20.0f);
-                        p.setColor(Color.RED);
-                        c.drawRect(new RectF(locations[x+1]*w, locations[x]*h, locations[x+3]*w, locations[x+2]*h), p);
+                        Paint paint = new Paint();
+                        paint.setAntiAlias(true);
+                        paint.setStyle(Paint.Style.STROKE);
+                        paint.setStrokeWidth(20.0f);
+                        paint.setColor(Color.RED);
+                        RectF rect = new RectF(locations[i * 4 + 1] * width, locations[i * 4] * height, locations[i * 4 + 3] * width, locations[i * 4 + 2] * height);
+                        canvas.drawRect(rect, paint);
                     }
                 }
-
-
                 imageView.setImageBitmap(mutable);
 
             }
