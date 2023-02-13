@@ -3,6 +3,7 @@ package com.example.speakingtechnology;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -17,7 +18,9 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.widget.ImageView;
@@ -36,6 +39,7 @@ import org.tensorflow.lite.support.image.ops.ResizeOp;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class Object_Detection extends AppCompatActivity {
 
@@ -47,11 +51,21 @@ public class Object_Detection extends AppCompatActivity {
     SsdMobilenetV11Metadata1 model;
     ImageProcessor imageProcessor;
     List<String> labels;
+    float x1,x2,y1,y2;
+    private TextToSpeech textToSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_object_detection);
+        textToSpeech= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                textToSpeech.setLanguage(Locale.US);
+                textToSpeech.setSpeechRate((float)0.8);
+                textToSpeech.speak("Opening Object Detection !!! ",TextToSpeech.QUEUE_FLUSH,null,null);
+            }
+        });
 
         check_permissions();
 
@@ -117,8 +131,10 @@ public class Object_Detection extends AppCompatActivity {
                             p.setTextSize(150.0f);
                             p.setColor(Color.WHITE);
                             c.drawText(labels.get(x), locations[x+1]*w, (locations[x]+0.1f)*h, p);
+                            Thread.sleep(1000);
+                            textToSpeech.speak(labels.get(x),TextToSpeech.QUEUE_FLUSH,null,null);
                         }
-                        catch (NullPointerException e){
+                        catch (NullPointerException | InterruptedException e){
 
                         }
                         p.setStyle(Paint.Style.STROKE);
@@ -140,6 +156,26 @@ public class Object_Detection extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         model.close();
+    }
+    public boolean onTouchEvent(MotionEvent touchEvent){
+        switch(touchEvent.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                x1 = touchEvent.getX();
+                y1 = touchEvent.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = touchEvent.getX();
+                y2 = touchEvent.getY();
+                if(x1 > x2)
+                {
+                    textToSpeech.stop();
+                    textToSpeech.shutdown();
+                    Intent i = new Intent(Object_Detection.this, MainPage.class);
+                    startActivity(i);
+                }
+                break;
+        }
+        return false;
     }
 
     @SuppressLint("MissingPermission")

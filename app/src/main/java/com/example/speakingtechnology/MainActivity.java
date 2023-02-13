@@ -6,14 +6,11 @@ import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import android.Manifest;
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -21,7 +18,6 @@ import androidx.core.app.ActivityCompat;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    ImageView imageView;
     private TextToSpeech textToSpeech;
     float x1,x2,y1,y2;
 
@@ -41,20 +37,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_CONTACTS,WRITE_EXTERNAL_STORAGE,Manifest.permission.WRITE_CONTACTS,Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION,CAMERA,INTERNET,RECORD_AUDIO}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_CONTACTS,WRITE_EXTERNAL_STORAGE,Manifest.permission.SEND_SMS,Manifest.permission.WRITE_CONTACTS,Manifest.permission.CALL_PHONE,Manifest.permission.ACCESS_FINE_LOCATION,CAMERA,INTERNET,RECORD_AUDIO}, PackageManager.PERMISSION_GRANTED);
 
     }
-
-    private boolean isServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     public boolean onTouchEvent(MotionEvent touchEvent){
         switch(touchEvent.getAction()){
