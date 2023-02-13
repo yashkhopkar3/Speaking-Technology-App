@@ -12,9 +12,9 @@
         android:id="@+id/textureView"/>
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        android:background="#000"/>
+        android:background="#000" />
 
 </RelativeLayout>

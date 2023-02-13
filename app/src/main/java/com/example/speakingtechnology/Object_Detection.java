@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -18,7 +17,6 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.Surface;
 import android.view.TextureView;
@@ -34,11 +32,8 @@ import org.tensorflow.lite.support.common.FileUtil;
 import org.tensorflow.lite.support.image.ImageProcessor;
 import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.image.ops.ResizeOp;
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -109,21 +104,30 @@ public class Object_Detection extends AppCompatActivity {
 
                 int h=bitmap.getHeight(), w=bitmap.getWidth();
 
+                Paint p = new Paint();
+                p.setAntiAlias(true);
+                p.setStyle(Paint.Style.STROKE);
+                p.setStrokeWidth(10.0f);
+                p.setColor(Color.RED);
+
                 for(int x=0; x<numberOfDetections[0]; x++){
                     if(scores[x] > 0.6){
                         Log.d("mssgs", classes[x]+"");
                         try{
-                            p.setTextSize(90.0f);
-                            c.drawText(labels.get(x), locations[x+1]*w, locations[x]*h, p);
+                            p.setTextSize(150.0f);
+                            p.setColor(Color.WHITE);
+                            c.drawText(labels.get(x), locations[x+1]*w, (locations[x]+0.1f)*h, p);
                         }
                         catch (NullPointerException e){
 
                         }
                         p.setStyle(Paint.Style.STROKE);
-                        p.setStrokeWidth(30.0f);
+                        p.setStrokeWidth(20.0f);
+                        p.setColor(Color.RED);
                         c.drawRect(new RectF(locations[x+1]*w, locations[x]*h, locations[x+3]*w, locations[x+2]*h), p);
                     }
                 }
+
 
                 imageView.setImageBitmap(mutable);
 
