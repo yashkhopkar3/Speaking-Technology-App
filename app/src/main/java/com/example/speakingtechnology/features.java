@@ -22,7 +22,7 @@ public class features extends AppCompatActivity {
             public void onInit(int i) {
                 textToSpeech.setLanguage(Locale.US);
                 textToSpeech.setSpeechRate((float)0.7);
-                textToSpeech.speak("Features of Application, ! Say Calculator to perform mathematical calculations,! Say Date and Time to get date and time , ! Say Read it enables the camera to take pictures of printed text and read it, ! Say Battery to get current battery status,! Say Location to get current Location ,! Say Exit to close the application !!!!!! AND swipe right to go to the  main page !!!! and swipe left  repeat features again ",TextToSpeech.QUEUE_FLUSH,null,null);
+                textToSpeech.speak("Features of Application, ! Say Calculator to perform mathematical calculations,! Say Date and Time to get date and time , ! Say Read it enables the camera to take pictures of printed text and read it, ! Say Battery to get current battery status, ! Say Location to get current Location , ! Say (Call ) to call, ! Say (message ) to message  , !   Say (Object Dectection ) to detect the object  ,  Say Exit to close the application !!!!!! AND swipe right to go to the  main page !!!! and swipe left  repeat features again ",TextToSpeech.QUEUE_FLUSH,null,null);
             }
         });
     }

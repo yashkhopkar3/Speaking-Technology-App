@@ -1,137 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#7ADDCE"
     android:backgroundTint="#71DBE4"
     tools:context=".features">
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="327dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:text="Features of Application"
         android:textColor="#08143A"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.19"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:textSize="30sp"/>
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="335dp"
-        android:layout_height="75dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:text="Say (Calculator) to perform mathematical calculations"
         android:textColor="#08143A"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.381"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="339dp"
-        android:layout_height="79dp"
-        android:layout_marginBottom="12dp"
-        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:text="Say (Date and Time ) to get date and time "
         android:textColor="#08143A"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.305"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="336dp"
-        android:layout_height="101dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:text="Say (Read) it enables the camera to take pictures of printed text and read it"
         android:textColor="#08143A"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="335dp"
-        android:layout_height="71dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:text="Say (Battery) to get current battery status"
         android:textColor="#08143A"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.381"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="337dp"
-        android:layout_height="41dp"
-        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:text="Say (Location) to get Location "
         android:textColor="#08143A"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.405"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="342dp"
-        android:layout_height="47dp"
-        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
         android:text="Say (Call ) to call  "
         android:textColor="#08143A"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.42"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="342dp"
-        android:layout_height="47dp"
-        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Say (message ) to message  "
+        android:layout_marginBottom="20dp"
         android:textColor="#08143A"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="40dp"
-        android:gravity="left"
-        android:text="Say (Exit) to close the application "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Say (Object Dectection ) to detect the object  "
+        android:layout_marginBottom="20dp"
         android:textColor="#08143A"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.328"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="22sp"/>
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Say (Exit) to close the application "
+        android:layout_marginBottom="20dp"
+        android:textColor="#08143A"
+        android:textSize="22sp"/>
+</LinearLayout>
