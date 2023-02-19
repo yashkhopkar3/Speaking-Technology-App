@@ -118,27 +118,36 @@ public class Object_Detection extends AppCompatActivity {
 
                 int height = bitmap.getHeight();
                 int width = bitmap.getWidth();
-
-                for (int i = 0; i < numberOfDetections[0]; i++) {
-                    if (scores[i] > 0.55) {
-                        Log.d("mssgs", classes[i] + "");
-                        try {
+                boolean objectDetected = false;
+                    for (int i = 0; i < numberOfDetections[0]; i++) {
+                        if (scores[i] > 0.55) {
+                            Log.d("mssgs", classes[i] + "");
+                            try {
+                                Paint paint = new Paint();
+                                paint.setAntiAlias(true);
+                                paint.setTextSize(150.0f);
+                                paint.setColor(Color.WHITE);
+                                canvas.drawText(labels.get((int) classes[i]), locations[i * 4 + 1] * width, (locations[i * 4] + 0.1f) * height, paint);
+                                Thread.sleep(2000);
+                                textToSpeech.speak(labels.get((int) classes[i]), TextToSpeech.QUEUE_FLUSH, null, null);
+                            } catch (NullPointerException | InterruptedException e) {
+                            }
                             Paint paint = new Paint();
                             paint.setAntiAlias(true);
-                            paint.setTextSize(150.0f);
-                            paint.setColor(Color.WHITE);
-                            canvas.drawText(labels.get((int)classes[i]), locations[i * 4 + 1] * width, (locations[i * 4] + 0.1f) * height, paint);
-                            Thread.sleep(1000);
-                            textToSpeech.speak(labels.get((int)classes[i]),TextToSpeech.QUEUE_FLUSH,null,null);
-                        } catch (NullPointerException | InterruptedException e) {
+                            paint.setStyle(Paint.Style.STROKE);
+                            paint.setStrokeWidth(20.0f);
+                            paint.setColor(Color.RED);
+                            RectF rect = new RectF(locations[i * 4 + 1] * width, locations[i * 4] * height, locations[i * 4 + 3] * width, locations[i * 4 + 2] * height);
+                            canvas.drawRect(rect, paint);
+                            objectDetected = true;
                         }
-                        Paint paint = new Paint();
-                        paint.setAntiAlias(true);
-                        paint.setStyle(Paint.Style.STROKE);
-                        paint.setStrokeWidth(20.0f);
-                        paint.setColor(Color.RED);
-                        RectF rect = new RectF(locations[i * 4 + 1] * width, locations[i * 4] * height, locations[i * 4 + 3] * width, locations[i * 4 + 2] * height);
-                        canvas.drawRect(rect, paint);
+                    }
+                if (!objectDetected) {
+                    textToSpeech.speak("No object detected. Swipe right to go to the main page.", TextToSpeech.QUEUE_FLUSH, null, null);
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
                 imageView.setImageBitmap(mutable);
