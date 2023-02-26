@@ -31,6 +31,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class OCR extends AppCompatActivity {
     private TextView textView;
     private SurfaceView surfaceView;
@@ -41,12 +43,15 @@ public class OCR extends AppCompatActivity {
     private TextToSpeech textToSpeech;
     private String stringResult = null;
     ScrollView sv;
+    GifImageView gifImageView ;
+
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ocr);
         sv= findViewById(R.id.a);
+         gifImageView = findViewById(R.id.gif);
         sv.setVisibility(View.GONE);
         ActivityCompat.requestPermissions(this, new String[]{CAMERA,INTERNET}, PackageManager.PERMISSION_GRANTED);
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -78,6 +83,7 @@ public class OCR extends AppCompatActivity {
                 {
                     textToSpeech.stop();
                     setContentView(R.layout.surface);
+                    gifImageView.setVisibility(View.GONE);
                     textToSpeech.speak("Tap to Process Image To text !!!! ", TextToSpeech.QUEUE_FLUSH, null, null);
                     textRecognizer();
                 }
@@ -170,6 +176,8 @@ public class OCR extends AppCompatActivity {
 
     private void resultObtained() {
         setContentView(R.layout.activity_ocr);
+        GifImageView gifImageView = findViewById(R.id.gif);
+        gifImageView.setVisibility(View.GONE);
         sv.setVisibility(View.VISIBLE);
         textView = findViewById(R.id.textView);
         textView.setText(stringResult);

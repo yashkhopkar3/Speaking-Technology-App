@@ -7,24 +7,27 @@
     android:layout_height="match_parent">
 
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif"
         android:layout_width="wrap_content"
         android:layout_height="280dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="451dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="200dp"
         android:background="@drawable/ocr" />
 
     <ScrollView
         android:id="@+id/a"
-        android:layout_width="300dp"
-        android:layout_height="399dp"
+        android:layout_width="wrap_content"
+        android:layout_height="640dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="286dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="44dp"
         android:layout_marginBottom="20dp">
 
         <TextView
@@ -38,7 +41,7 @@
             android:text="OCR READER FOR VISUALLY IMPARED PEOPLES"
             android:textColor="@color/black"
             android:textIsSelectable="true"
-            android:textSize="16dp"
+            android:textSize="22sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp" />
     </ScrollView>
