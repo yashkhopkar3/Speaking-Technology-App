@@ -106,7 +106,7 @@ public class MainActivity2 extends AppCompatActivity {
                      Result= data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     change= result.get(0).toLowerCase(Locale.ROOT);
                     change = change.replace("x","*");
-                    change = change.replace("X","*");
+                    change = change.replace("multiply","*");
                     change = change.replace("add","+");
                     change = change.replace("sub","-");
                     change = change.replace("to","2");

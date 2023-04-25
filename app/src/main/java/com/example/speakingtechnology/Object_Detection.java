@@ -68,23 +68,28 @@ public class Object_Detection extends AppCompatActivity {
         });
 
         check_permissions();
-
+        // Initialize the object detection model using the SsdMobilenetV11Metadata1 class
         try {
             model= SsdMobilenetV11Metadata1.newInstance(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        // Load labels from a file named "labels.txt"
         try {
             labels = FileUtil.loadLabels(this, "labels.txt");
             Log.d("labels", "labels loaded "+ labels.get(0));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // Set up an ImageProcessor object with a ResizeOp to resize images to 300x300 pixels using bilinear interpolation
         imageView = findViewById(R.id.imageView);
         p = new Paint();
         imageProcessor = new ImageProcessor.Builder().add(new ResizeOp(300, 300, ResizeOp.ResizeMethod.BILINEAR)).build();
+
+        // Initialize a CameraManager object
         cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
+        // Set up a TextureView with a SurfaceTextureListener to open the camera when the surface texture is available
         textureView = findViewById(R.id.textureView);
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
@@ -101,21 +106,24 @@ public class Object_Detection extends AppCompatActivity {
             }
             @Override
             public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surfaceTexture) {
+                // Get the current frame from the texture view as a bitmap
                 Bitmap bitmap = textureView.getBitmap();
+                // Convert the bitmap to a TensorImage for processing
                 TensorImage image = TensorImage.fromBitmap(bitmap);
-
+                // Process the image using an image processor
                 image = imageProcessor.process(image);
 
+                // Run the processed image through the model and get the outputs
                 SsdMobilenetV11Metadata1.Outputs outputs = model.process(image);
-
+                // Extract the output data from the model
                 float[] locations = outputs.getLocationsAsTensorBuffer().getFloatArray();
                 float[] classes = outputs.getClassesAsTensorBuffer().getFloatArray();
                 float[] scores = outputs.getScoresAsTensorBuffer().getFloatArray();
                 float[] numberOfDetections = outputs.getNumberOfDetectionsAsTensorBuffer().getFloatArray();
-
+                // Create a mutable copy of the bitmap to draw on
                 Bitmap mutable = bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 Canvas canvas = new Canvas(mutable);
-
+                // Get the height and width of the bitmap
                 int height = bitmap.getHeight();
                 int width = bitmap.getWidth();
                 boolean objectDetected = false;
@@ -127,8 +135,10 @@ public class Object_Detection extends AppCompatActivity {
                                 paint.setAntiAlias(true);
                                 paint.setTextSize(150.0f);
                                 paint.setColor(Color.WHITE);
+                                // Draw the label of the detected object on the canvas
                                 canvas.drawText(labels.get((int) classes[i]), locations[i * 4 + 1] * width, (locations[i * 4] + 0.1f) * height, paint);
                                 Thread.sleep(2000);
+                                // Use text-to-speech to speak the label of the detected object
                                 textToSpeech.speak(labels.get((int) classes[i]), TextToSpeech.QUEUE_FLUSH, null, null);
                             } catch (NullPointerException | InterruptedException e) {
                             }
@@ -137,12 +147,15 @@ public class Object_Detection extends AppCompatActivity {
                             paint.setStyle(Paint.Style.STROKE);
                             paint.setStrokeWidth(20.0f);
                             paint.setColor(Color.RED);
+                            // Create a rectangle around the detected object
                             RectF rect = new RectF(locations[i * 4 + 1] * width, locations[i * 4] * height, locations[i * 4 + 3] * width, locations[i * 4 + 2] * height);
+                            // Draw the rectangle on the canvas
                             canvas.drawRect(rect, paint);
                             objectDetected = true;
                         }
                     }
                 if (!objectDetected) {
+                    // If no object was detected, use text-to-speech to inform the user
                     textToSpeech.speak("No object detected. Swipe right to go to the main page.", TextToSpeech.QUEUE_FLUSH, null, null);
                     try {
                         Thread.sleep(4000);
@@ -150,6 +163,7 @@ public class Object_Detection extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+                // Set the image view to display the updated bitmap
                 imageView.setImageBitmap(mutable);
 
             }
@@ -160,6 +174,7 @@ public class Object_Detection extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // Close the model when the activity is destroyed
         model.close();
     }
     public boolean onTouchEvent(MotionEvent touchEvent){
@@ -184,19 +199,25 @@ public class Object_Detection extends AppCompatActivity {
     }
 
     @SuppressLint("MissingPermission")
+    //This code defines a method called open_camera that opens the camera and sets up a preview using a TextureView.
     void open_camera(){
         try {
+            // Open the camera
             cameraManager.openCamera(cameraManager.getCameraIdList()[0], new CameraDevice.StateCallback() {
                 @Override
                 public void onOpened(@NonNull CameraDevice cameraDevice) {
                     try {
+                        // Create a capture request for the camera preview
                         CaptureRequest.Builder builder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+                        // Set the surface for the capture request
                         Surface surface = new Surface(textureView.getSurfaceTexture());
                         builder.addTarget(surface);
+                        // Create a capture session for the camera preview
                         cameraDevice.createCaptureSession(Collections.singletonList(surface), new CameraCaptureSession.StateCallback() {
                             @Override
                             public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
                                 try {
+                                    // Set the capture request to repeat
                                     cameraCaptureSession.setRepeatingRequest(builder.build(), null, null);
                                 } catch (CameraAccessException e) {
                                     e.printStackTrace();

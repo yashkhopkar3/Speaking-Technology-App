@@ -87,8 +87,7 @@ public class Location extends AppCompatActivity {
                 public void onComplete(@NonNull Task<android.location.Location> task) {
 
                      android.location.Location location = task.getResult();
-                    if (location != null)
-                    {
+
                         try {
                             Geocoder geocoder = new Geocoder(Location.this, Locale.getDefault());
                             addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
@@ -102,13 +101,14 @@ public class Location extends AppCompatActivity {
                         {
                             e.printStackTrace();
                         }
-                    }
+
                 }
             });
         }
         else
         {
             ActivityCompat.requestPermissions(Location.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+            speak3();
         }
     }
 }
